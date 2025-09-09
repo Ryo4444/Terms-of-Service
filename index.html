@@ -1,116 +1,191 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ข้อกำหนดและนโยบาย – Washi Co</title>
-  <meta name="description" content="ข้อกำหนดในการให้บริการและนโยบายความเป็นส่วนตัวของ Washi Co" />
-  <link rel="canonical" href="https://terms-of-service-washi.vercel.app/legal" />
-  <meta property="og:title" content="ข้อกำหนดและนโยบาย – Washi Co" />
-  <meta property="og:description" content="ข้อกำหนดในการให้บริการและนโยบายความเป็นส่วนตัวของ Washi Co" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://terms-of-service-washi.vercel.app/legal" />
-  <meta property="og:image" content="https://terms-of-service-washi.vercel.app/og-image.png" />
-  <meta name="robots" content="index,follow" />
-  <link rel="icon" href="/favicon.ico" />  <!-- Tailwind + Icons + Typed.js -->  <script src="https://cdn.tailwindcss.com"></script>  <script src="https://unpkg.com/feather-icons"></script>  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>  <style>
-    /* small utilities */
-    .prose h1, .prose h2, .prose h3 { scroll-margin-top: 6.5rem; }
-    .toc a.active { font-weight: 700; color: #f472b6; }
-    .glass { background: rgba(255,255,255,0.6); backdrop-filter: blur(6px); }
-    .dark .glass { background: rgba(15,23,42,0.6); }
-    .fade-up { transform: translateY(8px); opacity: 0; transition: all .5s ease; }
-    .fade-up.visible { transform: translateY(0); opacity: 1; }
-  </style></head>
-<body class="min-h-screen text-slate-800 bg-gradient-to-br from-[#6d28d9] via-[#a78bfa] to-[#f472b6] dark:text-slate-100">
-  <!-- Page wrapper with centered card -->
-  <div class="min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="sticky top-0 z-40 glass border-b border-white/20 dark:border-black/20">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-3 text-white">
-          <div class="p-2 bg-white/20 rounded-lg"><i data-feather="hexagon" class="w-5 h-5"></i></div>
-          <span class="font-semibold text-lg">Washi Co</span>
-        </a>
-        <div class="flex items-center gap-4">
-          <nav class="hidden md:flex gap-4 text-white/90 text-sm">
-            <a href="#terms" class="hover:underline">Terms</a>
-            <a href="#privacy" class="hover:underline">Privacy</a>
-          </nav>
-          <button id="themeToggle" aria-label="Toggle theme" class="p-2 rounded-full bg-white/20 text-white hover:bg-white/30">
-            <i data-feather="moon"></i>
-          </button>
-        </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>นโยบายของบอท – WashiBot</title>
+  <meta name="description" content="ข้อกำหนดและนโยบายความเป็นส่วนตัวของ WashiBot Discord" />
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2f3136, #23272a);
+      color: #dcddde;
+    }
+    .glass {
+      background: rgba(47, 49, 54, 0.8);
+      backdrop-filter: blur(10px);
+    }
+    .glow {
+      text-shadow: 0 0 6px #7289da, 0 0 12px #99aab5;
+    }
+    .fade-up {
+      transform: translateY(12px);
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+    .fade-up.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .toc a.active {
+      color: #7289da;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 glass border-b border-gray-700 px-6 py-4 flex justify-between items-center">
+    <a href="/" class="flex items-center gap-3 text-white">
+      <div class="p-2 bg-[#7289da]/30 rounded-lg"><i data-feather="zap" class="w-5 h-5"></i></div>
+      <span class="font-bold text-lg glow">WashiBot</span>
+    </a>
+    <button id="themeToggle" class="p-2 rounded-full bg-[#7289da]/20 hover:bg-[#7289da]/40 transition" aria-label="Toggle Theme">
+      <i data-feather="moon"></i>
+    </button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="py-20 text-center">
+    <h1 class="text-5xl font-extrabold glow mb-4">ข้อกำหนด & นโยบายของ WashiBot</h1>
+    <p id="typedArea" class="text-xl text-gray-400"></p>
+    <div class="mt-8 flex justify-center gap-4">
+      <a href="#terms" class="px-6 py-3 bg-[#7289da] text-white rounded-lg hover:scale-105 transition shadow-lg">อ่านข้อกำหนด</a>
+      <a href="#privacy" class="px-6 py-3 border border-gray-600 rounded-lg hover:bg-gray-700 transition">นโยบายความเป็นส่วนตัว</a>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-4 gap-8 -mt-12">
+
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1 sticky top-28 hidden lg:block">
+      <div class="glass rounded-2xl p-6 shadow-lg">
+        <h4 class="text-sm uppercase text-gray-400 mb-3">สารบัญ</h4>
+        <nav class="text-sm flex flex-col gap-2 toc">
+          <span class="text-xs text-gray-500 mb-2">ข้อกำหนด (Terms)</span>
+          <a href="#terms" class="hover:text-[#7289da]">Overview</a>
+          <a href="#acceptance" class="hover:text-[#7289da]">1) การยอมรับ</a>
+          <a href="#changes" class="hover:text-[#7289da]">2) การเปลี่ยนแปลง</a>
+          <a href="#account" class="hover:text-[#7289da]">4) บัญชีผู้ใช้</a>
+          <span class="text-xs text-gray-500 mt-3 mb-2">นโยบายความเป็นส่วนตัว (Privacy)</span>
+          <a href="#privacy" class="hover:text-[#7289da]">Overview</a>
+          <a href="#p-data-collect" class="hover:text-[#7289da]">1) ข้อมูลที่เก็บ</a>
+          <a href="#p-data-use" class="hover:text-[#7289da]">2) การใช้ข้อมูล</a>
+        </nav>
       </div>
-    </header><!-- Hero -->
-<section class="py-20">
-  <div class="max-w-5xl mx-auto text-center px-6">
-    <div class="inline-block px-4 py-2 rounded-full bg-white/20 text-white mb-6">ข้อกำหนดและนโยบาย</div>
-    <h1 class="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-md">ข้อกำหนดในการให้บริการ &amp; นโยบายความเป็นส่วนตัว</h1>
-    <p class="mt-4 max-w-2xl mx-auto text-white/90 text-lg" id="typedArea"></p>
-    <div class="mt-8 flex justify-center gap-3">
-      <a href="#terms" class="px-5 py-3 rounded-lg bg-white text-pink-600 font-semibold shadow hover:scale-[1.02] transition">อ่านข้อกำหนด</a>
-      <a href="#privacy" class="px-5 py-3 rounded-lg border border-white/30 text-white hover:bg-white/10 transition">นโยบายความเป็นส่วนตัว</a>
-    </div>
-  </div>
-</section>
+    </aside>
 
-<!-- Content area -->
-<main class="max-w-6xl mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-4 gap-8 w-full -mt-12">
-  <!-- Sidebar -->
-  <aside class="lg:col-span-1 sticky top-28 self-start hidden lg:block">
-    <div class="glass rounded-2xl p-5 shadow-lg">
-      <h4 class="text-sm uppercase tracking-wide text-pink-100">สารบัญ</h4>
-      <nav class="mt-4 text-sm space-y-2 toc">
-        <div class="text-xs text-white/80 mb-2">ข้อกำหนด (Terms of Service)</div>
-        <a href="#terms" class="block hover:underline">Overview</a>
-        <a href="#acceptance" class="block hover:underline">1) การยอมรับ</a>
-        <a href="#changes" class="block hover:underline">2) การเปลี่ยนแปลง</a>
-        <a href="#eligibility" class="block hover:underline">3) คุณสมบัติ</a>
-        <a href="#account" class="block hover:underline">4) บัญชีผู้ใช้</a>
-        <a href="#acceptable-use" class="block hover:underline">5) การใช้งานที่ยอมรับ</a>
-        <a href="#content" class="block hover:underline">6) เนื้อหาผู้ใช้</a>
-        <a href="#intellectual" class="block hover:underline">7) ทรัพย์สิน</a>
-        <a href="#third-party" class="block hover:underline">8) บริการบุคคลที่สาม</a>
-        <a href="#privacy-ref" class="block hover:underline">9) ความเป็นส่วนตัว</a>
-        <a href="#payments" class="block hover:underline">10) การชำระเงิน</a>
-        <a href="#warranty" class="block hover:underline">11) การรับประกัน</a>
-        <a href="#liability" class="block hover:underline">12) การจำกัดความรับผิด</a>
-        <a href="#termination" class="block hover:underline">13) การยุติ</a>
-        <a href="#governing-law" class="block hover:underline">14) กฎหมาย</a>
-        <a href="#contact-terms" class="block hover:underline">15) ติดต่อ (Terms)</a>
+    <!-- Content Section -->
+    <section class="lg:col-span-3">
+      <div class="glass rounded-2xl p-8 shadow-2xl">
+        <article class="prose prose-slate max-w-none">
 
-        <div class="h-2"></div>
-        <div class="text-xs text-white/80 mb-2">นโยบายความเป็นส่วนตัว (Privacy Policy)</div>
-        <a href="#privacy" class="block hover:underline">Overview</a>
-        <a href="#p-data-collect" class="block hover:underline">1) ข้อมูลที่เก็บ</a>
-        <a href="#p-data-use" class="block hover:underline">2) การใช้ข้อมูล</a>
-        <a href="#p-share" class="block hover:underline">3) การเปิดเผย</a>
-        <a href="#p-cookies" class="block hover:underline">4) คุกกี้</a>
-        <a href="#p-rights" class="block hover:underline">5) สิทธิ</a>
-        <a href="#p-security" class="block hover:underline">6) ความปลอดภัย</a>
-        <a href="#p-changes" class="block hover:underline">7) การเปลี่ยนแปลงนโยบาย</a>
-        <a href="#contact-privacy" class="block hover:underline">8) ติดต่อ (Privacy)</a>
-      </nav>
-    </div>
-  </aside>
+          <!-- Terms -->
+          <section id="terms" class="fade-up visible">
+            <h2 class="text-3xl font-bold glow mb-2">ข้อกำหนดในการใช้ WashiBot</h2>
+            <p class="text-gray-400 text-sm mb-4">อัปเดตล่าสุด: <span id="terms-updated"></span></p>
+            <p>เมื่อคุณใช้ WashiBot บน Discord คุณยอมรับข้อกำหนดเหล่านี้...</p>
 
-  <!-- Main content -->
-  <section class="lg:col-span-3">
-    <div class="glass rounded-2xl p-8 shadow-xl">
-      <article class="prose prose-slate max-w-none">
-        <!-- TERMS -->
-        <section id="terms" class="fade-up visible">
-          <h2 class="text-2xl font-bold">ข้อกำหนดในการให้บริการ (Terms of Service)</h2>
-          <p class="text-sm text-slate-700/80">อัปเดตล่าสุด: <span id="terms-updated"></span></p>
+            <h3 id="acceptance" class="mt-6 font-semibold text-lg">1) การยอมรับข้อกำหนด</h3>
+            <p>การใช้งานบอทถือว่าคุณยอมรับเงื่อนไขทั้งหมด หากไม่เห็นด้วย โปรดออกจากเซิร์ฟเวอร์หรือหยุดใช้บอท</p>
 
-          <p>
-            ข้อกำหนดในการให้บริการฉบับนี้ (เรียกว่า “ข้อกำหนด”) กำหนดสิทธิและหน้าที่ของผู้ใช้งาน
-            ที่เข้าใช้บริการที่เว็บไซต์ <strong>https://terms-of-service-washi.vercel.app</strong> (“เว็บไซต์”) และบริการอื่นๆ
-            ที่เกี่ยวข้องซึ่งให้บริการโดย <strong>Washi Co</strong> (“เรา”)
-          </p>
+            <h3 id="changes" class="mt-6 font-semibold text-lg">2) การเปลี่ยนแปลงข้อกำหนด</h3>
+            <p>เราอาจปรับปรุงข้อกำหนดนี้เป็นระยะ คุณควรตรวจสอบหน้าเว็บไซต์เป็นประจำ</p>
 
-          <h3 id="acceptance">1) การยอมรับข้อกำหนด</h3>
+            <h3 id="account" class="mt-6 font-semibold text-lg">4) บัญชีผู้ใช้</h3>
+            <ul class="list-disc pl-5 text-gray-300">
+              <li>คุณต้องใช้บัญชี Discord จริง</li>
+              <li>รับผิดชอบต่อคำสั่งและข้อมูลที่ส่งผ่านบอท</li>
+            </ul>
+          </section>
+
+          <hr class="my-8 border-gray-700">
+
+          <!-- Privacy -->
+          <section id="privacy" class="fade-up">
+            <h2 class="text-3xl font-bold glow mb-2">นโยบายความเป็นส่วนตัว</h2>
+            <p class="text-gray-400 text-sm mb-4">อัปเดตล่าสุด: <span id="privacy-updated"></span></p>
+            <p>WashiBot ให้ความสำคัญกับความเป็นส่วนตัวของผู้ใช้ Discord...</p>
+
+            <h3 id="p-data-collect" class="mt-6 font-semibold text-lg">1) ข้อมูลที่เก็บ</h3>
+            <ul class="list-disc pl-5 text-gray-300">
+              <li>ข้อมูลบัญชี Discord เช่น User ID, Username</li>
+              <li>ข้อมูลการใช้งานบอท เช่น คำสั่งที่ใช้, เวลาใช้งาน</li>
+            </ul>
+
+            <h3 id="p-data-use" class="mt-6 font-semibold text-lg">2) การใช้ข้อมูล</h3>
+            <ul class="list-disc pl-5 text-gray-300">
+              <li>ปรับปรุงคำสั่งและบริการของบอท</li>
+              <li>วิเคราะห์เพื่อปรับประสบการณ์ผู้ใช้</li>
+            </ul>
+          </section>
+
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 py-8 text-center text-gray-500 text-sm">
+    © <span id="year"></span> WashiBot. All Rights Reserved.
+  </footer>
+
+  <script>
+    // Feather icons
+    feather.replace();
+
+    // Typed.js
+    new Typed('#typedArea', {
+      strings: ['อ่านข้อกำหนดก่อนใช้งาน', 'WashiBot ให้ความสำคัญกับความเป็นส่วนตัว', 'ติดต่อเราหากมีคำถาม'],
+      typeSpeed: 50,
+      backSpeed: 30,
+      loop: true
+    });
+
+    // Update dates
+    const now = new Date();
+    document.getElementById('year').textContent = now.getFullYear();
+    const fmt = new Intl.DateTimeFormat('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('terms-updated').textContent = fmt.format(now);
+    document.getElementById('privacy-updated').textContent = fmt.format(now);
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      themeToggle.animate([{transform:'scale(1)'},{transform:'scale(1.1)'},{transform:'scale(1)'}],{duration:250});
+    });
+
+    // ScrollSpy
+    const tocLinks = document.querySelectorAll('aside nav a');
+    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          tocLinks.forEach(l=>l.classList.remove('active'));
+          const link = document.querySelector('aside nav a[href="#'+entry.target.id+'"]');
+          if(link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin:'-40% 0px -40% 0px', threshold:0 });
+    sections.forEach(s => observer.observe(s));
+
+    // Fade-up animation
+    document.querySelectorAll('.fade-up').forEach(el => setTimeout(()=>el.classList.add('visible'),150));
+  </script>
+
+</body>
+</html>
           <p>
             เมื่อคุณเข้าถึงหรือใช้งานเว็บไซต์ ถือว่าคุณได้อ่าน ทำความเข้าใจ และยอมรับข้อกำหนดนี้แล้ว
             หากคุณไม่เห็นด้วยกับข้อกำหนดใด โปรดหยุดใช้งานทันที
