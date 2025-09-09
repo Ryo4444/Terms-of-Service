@@ -14,130 +14,191 @@
 
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #2f3136, #23272a);
-      color: #dcddde;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #0f0f1f);
+      color: #e0e0e0;
+      overflow-x: hidden;
     }
     .glass {
-      background: rgba(47, 49, 54, 0.8);
-      backdrop-filter: blur(10px);
+      background: rgba(30, 30, 46, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(147, 51, 234, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
     .glow {
-      text-shadow: 0 0 6px #7289da, 0 0 12px #99aab5;
+      text-shadow: 0 0 8px rgba(147, 51, 234, 0.8), 0 0 16px rgba(167, 139, 250, 0.4);
     }
     .fade-up {
-      transform: translateY(12px);
+      transform: translateY(20px);
       opacity: 0;
-      transition: all 0.6s ease;
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .fade-up.visible {
       transform: translateY(0);
       opacity: 1;
     }
-    .toc a.active {
-      color: #7289da;
+    .toc a {
+      transition: color 0.3s ease;
+    }
+    .toc a.active, .toc a:hover {
+      color: #9333ea;
       font-weight: 600;
+      transform: translateX(4px);
+    }
+    .hover-scale {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-scale:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.3);
+    }
+    .glow-button {
+      background: linear-gradient(45deg, #9333ea, #a855f7);
+      transition: all 0.3s ease;
+    }
+    .glow-button:hover {
+      box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+      transform: translateY(-2px);
+    }
+    .section-divider {
+      border-image: linear-gradient(to right, transparent, #9333ea, transparent) 1;
+    }
+    ::selection {
+      background: #9333ea;
+      color: #fff;
     }
   </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen relative">
+  <!-- Background Particles -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22%3E%3Ccircle cx=%222%22 cy=%222%22 r=%222%22 fill=%22rgba(147,51,234,0.2)%22/%3E%3C/svg%3E')] opacity-20"></div>
+  </div>
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 glass border-b border-gray-700 px-6 py-4 flex justify-between items-center">
+  <header class="sticky top-0 z-50 glass border-b border-purple-900/30 px-6 py-4 flex justify-between items-center">
     <a href="/" class="flex items-center gap-3 text-white">
-      <div class="p-2 bg-[#7289da]/30 rounded-lg"><i data-feather="zap" class="w-5 h-5"></i></div>
-      <span class="font-bold text-lg glow">WashiBot</span>
+      <div class="p-2 bg-purple-600/20 rounded-lg hover-scale"><i data-feather="zap" class="w-6 h-6"></i></div>
+      <span class="font-bold text-xl glow">WashiBot</span>
     </a>
-    <button id="themeToggle" class="p-2 rounded-full bg-[#7289da]/20 hover:bg-[#7289da]/40 transition" aria-label="Toggle Theme">
-      <i data-feather="moon"></i>
+    <button id="themeToggle" class="p-2 rounded-full bg-purple-600/20 hover:bg-purple-600/40 transition hover-scale" aria-label="Toggle Theme">
+      <i data-feather="moon" class="w-5 h-5"></i>
     </button>
   </header>
 
   <!-- Hero Section -->
-  <section class="py-20 text-center">
-    <h1 class="text-5xl font-extrabold glow mb-4">ข้อกำหนด & นโยบายของ WashiBot</h1>
-    <p id="typedArea" class="text-xl text-gray-400"></p>
-    <div class="mt-8 flex justify-center gap-4">
-      <a href="#terms" class="px-6 py-3 bg-[#7289da] text-white rounded-lg hover:scale-105 transition shadow-lg">อ่านข้อกำหนด</a>
-      <a href="#privacy" class="px-6 py-3 border border-gray-600 rounded-lg hover:bg-gray-700 transition">นโยบายความเป็นส่วนตัว</a>
+  <section class="py-24 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-transparent"></div>
+    <h1 class="text-5xl md:text-6xl font-extrabold glow mb-6 fade-up">ข้อกำหนด & นโยบายของ WashiBot</h1>
+    <p id="typedArea" class="text-xl text-gray-300 max-w-2xl mx-auto"></p>
+    <div class="mt-10 flex justify-center gap-6">
+      <a href="#terms" class="px-8 py-3 glow-button text-white rounded-lg hover-scale">อ่านข้อกำหนด</a>
+      <a href="#privacy" class="px-8 py-3 border border-purple-600/50 text-purple-300 rounded-lg hover:bg-purple-900/20 hover-scale">นโยบายความเป็นส่วนตัว</a>
     </div>
   </section>
 
   <!-- Main Content -->
-  <main class="max-w-6xl mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-4 gap-8 -mt-12">
-
+  <main class="max-w-7xl mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-4 gap-10 -mt-12">
     <!-- Sidebar -->
     <aside class="lg:col-span-1 sticky top-28 hidden lg:block">
-      <div class="glass rounded-2xl p-6 shadow-lg">
-        <h4 class="text-sm uppercase text-gray-400 mb-3">สารบัญ</h4>
-        <nav class="text-sm flex flex-col gap-2 toc">
+      <div class="glass rounded-2xl p-6 shadow-lg fade-up">
+        <h4 class="text-sm uppercase text-gray-400 mb-4 tracking-wide">สารบัญ</h4>
+        <nav class="text-sm flex flex-col gap-3 toc">
           <span class="text-xs text-gray-500 mb-2">ข้อกำหนด (Terms)</span>
-          <a href="#terms" class="hover:text-[#7289da]">Overview</a>
-          <a href="#acceptance" class="hover:text-[#7289da]">1) การยอมรับ</a>
-          <a href="#changes" class="hover:text-[#7289da]">2) การเปลี่ยนแปลง</a>
-          <a href="#account" class="hover:text-[#7289da]">4) บัญชีผู้ใช้</a>
+          <a href="#terms" class="hover:text-purple-400">Overview</a>
+          <a href="#acceptance" class="hover:text-purple-400">1) การยอมรับ</a>
+          <a href="#changes" class="hover:text-purple-400">2) การเปลี่ยนแปลง</a>
+          <a href="#eligibility" class="hover:text-purple-400">3) คุณสมบัติผู้ใช้งาน</a>
+          <a href="#account" class="hover:text-purple-400">4) บัญชีผู้ใช้</a>
+          <a href="#acceptable-use" class="hover:text-purple-400">5) การใช้งานที่ยอมรับได้</a>
           <span class="text-xs text-gray-500 mt-3 mb-2">นโยบายความเป็นส่วนตัว (Privacy)</span>
-          <a href="#privacy" class="hover:text-[#7289da]">Overview</a>
-          <a href="#p-data-collect" class="hover:text-[#7289da]">1) ข้อมูลที่เก็บ</a>
-          <a href="#p-data-use" class="hover:text-[#7289da]">2) การใช้ข้อมูล</a>
+          <a href="#privacy" class="hover:text-purple-400">Overview</a>
+          <a href="#p-data-collect" class="hover:text-purple-400">1) ข้อมูลที่เก็บ</a>
+          <a href="#p-data-use" class="hover:text-purple-400">2) การใช้ข้อมูล</a>
+          <a href="#p-share" class="hover:text-purple-400">3) การเปิดเผย/แชร์ข้อมูล</a>
         </nav>
       </div>
     </aside>
 
     <!-- Content Section -->
     <section class="lg:col-span-3">
-      <div class="glass rounded-2xl p-8 shadow-2xl">
-        <article class="prose prose-slate max-w-none">
-
+      <div class="glass rounded-2xl p-8 shadow-2xl fade-up">
+        <article class="prose prose-slate max-w-none text-gray-200">
           <!-- Terms -->
-          <section id="terms" class="fade-up visible">
-            <h2 class="text-3xl font-bold glow mb-2">ข้อกำหนดในการใช้ WashiBot</h2>
-            <p class="text-gray-400 text-sm mb-4">อัปเดตล่าสุด: <span id="terms-updated"></span></p>
-            <p>เมื่อคุณใช้ WashiBot บน Discord คุณยอมรับข้อกำหนดเหล่านี้...</p>
+          <section id="terms" class="fade-up">
+            <h2 class="text-4xl font-bold glow mb-4">ข้อกำหนดในการใช้ WashiBot</h2>
+            <p class="text-gray-400 text-sm mb-6">อัปเดตล่าสุด: <span id="terms-updated"></span></p>
+            <p>เมื่อคุณใช้ WashiBot บน Discord หรือเว็บไซต์ของเรา คุณยอมรับข้อกำหนดเหล่านี้...</p>
 
-            <h3 id="acceptance" class="mt-6 font-semibold text-lg">1) การยอมรับข้อกำหนด</h3>
-            <p>การใช้งานบอทถือว่าคุณยอมรับเงื่อนไขทั้งหมด หากไม่เห็นด้วย โปรดออกจากเซิร์ฟเวอร์หรือหยุดใช้บอท</p>
+            <h3 id="acceptance" class="mt-8 font-semibold text-xl">1) การยอมรับข้อกำหนด</h3>
+            <p>การใช้งานบอทหรือเว็บไซต์ถือว่าคุณยอมรับเงื่อนไขทั้งหมด หากไม่เห็นด้วย โปรดหยุดใช้บริการทันที</p>
 
-            <h3 id="changes" class="mt-6 font-semibold text-lg">2) การเปลี่ยนแปลงข้อกำหนด</h3>
-            <p>เราอาจปรับปรุงข้อกำหนดนี้เป็นระยะ คุณควรตรวจสอบหน้าเว็บไซต์เป็นประจำ</p>
+            <h3 id="changes" class="mt-8 font-semibold text-xl">2) การเปลี่ยนแปลงข้อกำหนด</h3>
+            <p>เราอาจปรับปรุงข้อกำหนดเป็นครั้งคราว โดยจะแจ้งผ่านหน้าเว็บนี้ การใช้งานต่อไปหมายถึงคุณยอมรับข้อกำหนดที่แก้ไข</p>
 
-            <h3 id="account" class="mt-6 font-semibold text-lg">4) บัญชีผู้ใช้</h3>
-            <ul class="list-disc pl-5 text-gray-300">
-              <li>คุณต้องใช้บัญชี Discord จริง</li>
-              <li>รับผิดชอบต่อคำสั่งและข้อมูลที่ส่งผ่านบอท</li>
+            <h3 id="eligibility" class="mt-8 font-semibold text-xl">3) คุณสมบัติผู้ใช้งาน</h3>
+            <p>คุณรับรองว่ามีอายุอย่างน้อย 18 ปี หรือได้รับความยินยอมจากผู้ปกครอง และมีความสามารถตามกฎหมายในพื้นที่ของคุณ</p>
+
+            <h3 id="account" class="mt-8 font-semibold text-xl">4) บัญชีผู้ใช้</h3>
+            <ul class="list-disc pl-6 text-gray-300">
+              <li>คุณต้องใช้บัญชี Discord จริงและให้ข้อมูลที่ถูกต้อง</li>
+              <li>รับผิดชอบต่อคำสั่งและข้อมูลที่ส่งผ่านบอทหรือเว็บไซต์</li>
+              <li>เราอาจระงับบัญชีที่ละเมิดข้อกำหนด</li>
+            </ul>
+
+            <h3 id="acceptable-use" class="mt-8 font-semibold text-xl">5) การใช้งานที่ยอมรับได้</h3>
+            <p>คุณตกลงว่าจะไม่:</p>
+            <ul class="list-disc pl-6 text-gray-300">
+              <li>ละเมิดกฎหมาย ลิขสิทธิ์ หรือสิทธิของผู้อื่น</li>
+              <li>ส่งเนื้อหาที่ผิดกฎหมาย อันตราย หรือมีมัลแวร์</li>
+              <li>พยายามเจาะระบบหรือรบกวนการทำงานของบอท/เว็บไซต์</li>
             </ul>
           </section>
 
-          <hr class="my-8 border-gray-700">
+          <hr class="my-10 border-t section-divider">
 
           <!-- Privacy -->
           <section id="privacy" class="fade-up">
-            <h2 class="text-3xl font-bold glow mb-2">นโยบายความเป็นส่วนตัว</h2>
-            <p class="text-gray-400 text-sm mb-4">อัปเดตล่าสุด: <span id="privacy-updated"></span></p>
-            <p>WashiBot ให้ความสำคัญกับความเป็นส่วนตัวของผู้ใช้ Discord...</p>
+            <h2 class="text-4xl font-bold glow mb-4">นโยบายความเป็นส่วนตัว</h2>
+            <p class="text-gray-400 text-sm mb-6">อัปเดตล่าสุด: <span id="privacy-updated"></span></p>
+            <p>WashiBot และเว็บไซต์ให้ความสำคัญกับความเป็นส่วนตัวของผู้ใช้...</p>
 
-            <h3 id="p-data-collect" class="mt-6 font-semibold text-lg">1) ข้อมูลที่เก็บ</h3>
-            <ul class="list-disc pl-5 text-gray-300">
-              <li>ข้อมูลบัญชี Discord เช่น User ID, Username</li>
-              <li>ข้อมูลการใช้งานบอท เช่น คำสั่งที่ใช้, เวลาใช้งาน</li>
+            <h3 id="p-data-collect" class="mt-8 font-semibold text-xl">1) ข้อมูลที่เก็บ</h3>
+            <ul class="list-disc pl-6 text-gray-300">
+              <li>ข้อมูลบัญชี Discord: User ID, Username</li>
+              <li>ข้อมูลการใช้งาน: คำสั่ง, เวลาใช้งาน, การเข้าชมหน้าเว็บ</li>
+              <li>ข้อมูลเทคนิค: IP address, browser, device</li>
+              <li>คุกกี้: การตั้งค่าและตัวระบุไม่ระบุตัวตน</li>
             </ul>
 
-            <h3 id="p-data-use" class="mt-6 font-semibold text-lg">2) การใช้ข้อมูล</h3>
-            <ul class="list-disc pl-5 text-gray-300">
-              <li>ปรับปรุงคำสั่งและบริการของบอท</li>
-              <li>วิเคราะห์เพื่อปรับประสบการณ์ผู้ใช้</li>
+            <h3 id="p-data-use" class="mt-8 font-semibold text-xl">2) การใช้ข้อมูล</h3>
+            <ul class="list-disc pl-6 text-gray-300">
+              <li>ปรับปรุงคำสั่งและบริการของบอท/เว็บไซต์</li>
+              <li>วิเคราะห์เพื่อปรับแต่งประสบการณ์ผู้ใช้</li>
+              <li>สื่อสารกับผู้ใช้ผ่านการแจ้งเตือน</li>
             </ul>
+
+            <h3 id="p-share" class="mt-8 font-semibold text-xl">3) การเปิดเผย/แชร์ข้อมูล</h3>
+            <p>เราไม่ขายข้อมูล แต่แชร์กับผู้ให้บริการที่จำเป็นหรือตามกฎหมาย</p>
           </section>
-
         </article>
       </div>
     </section>
-
   </main>
 
+  <!-- Back to Top -->
+  <button id="backToTop" class="fixed bottom-8 right-8 p-4 rounded-full glow-button shadow-lg hidden hover-scale" aria-label="Back to top">
+    <i data-feather="chevron-up" class="w-6 h-6"></i>
+  </button>
+
   <!-- Footer -->
-  <footer class="mt-12 py-8 text-center text-gray-500 text-sm">
-    © <span id="year"></span> WashiBot. All Rights Reserved.
+  <footer class="mt-16 py-10 bg-purple-950/20">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-gray-300">
+      <div>© <span id="year"></span> WashiBot. สงวนลิขสิทธิ์</div>
+      <div class="mt-4 md:mt-0">
+        <a href="mailto:mumufuyuta@gmail.com" class="underline text-purple-400 hover:text-purple-300">ติดต่อเรา</a>
+      </div>
+    </div>
   </footer>
 
   <script>
@@ -146,9 +207,14 @@
 
     // Typed.js
     new Typed('#typedArea', {
-      strings: ['อ่านข้อกำหนดก่อนใช้งาน', 'WashiBot ให้ความสำคัญกับความเป็นส่วนตัว', 'ติดต่อเราหากมีคำถาม'],
+      strings: [
+        'อ่านข้อกำหนดและนโยบายก่อนใช้งาน',
+        'WashiBot ให้ความสำคัญกับความเป็นส่วนตัว',
+        'ติดต่อเราหากมีคำถามเกี่ยวกับบริการ'
+      ],
       typeSpeed: 50,
-      backSpeed: 30,
+      backSpeed: 25,
+      backDelay: 2000,
       loop: true
     });
 
@@ -162,225 +228,14 @@
     // Theme toggle
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      themeToggle.animate([{transform:'scale(1)'},{transform:'scale(1.1)'},{transform:'scale(1)'}],{duration:250});
-    });
-
-    // ScrollSpy
-    const tocLinks = document.querySelectorAll('aside nav a');
-    const sections = Array.from(tocLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          tocLinks.forEach(l=>l.classList.remove('active'));
-          const link = document.querySelector('aside nav a[href="#'+entry.target.id+'"]');
-          if(link) link.classList.add('active');
-        }
-      });
-    }, { rootMargin:'-40% 0px -40% 0px', threshold:0 });
-    sections.forEach(s => observer.observe(s));
-
-    // Fade-up animation
-    document.querySelectorAll('.fade-up').forEach(el => setTimeout(()=>el.classList.add('visible'),150));
-  </script>
-
-</body>
-</html>
-          <p>
-            เมื่อคุณเข้าถึงหรือใช้งานเว็บไซต์ ถือว่าคุณได้อ่าน ทำความเข้าใจ และยอมรับข้อกำหนดนี้แล้ว
-            หากคุณไม่เห็นด้วยกับข้อกำหนดใด โปรดหยุดใช้งานทันที
-          </p>
-
-          <h3 id="changes">2) การเปลี่ยนแปลงข้อกำหนด</h3>
-          <p>
-            เราอาจปรับปรุงข้อกำหนดเป็นครั้งคราว โดยจะแจ้งผ่านหน้าเว็บนี้โดยปรับ “อัปเดตล่าสุด”
-            การใช้งานเว็บไซต์อย่างต่อเนื่องหลังมีการปรับปรุงหมายถึงคุณยอมรับข้อกำหนดที่แก้ไขแล้ว
-          </p>
-
-          <h3 id="eligibility">3) คุณสมบัติผู้ใช้งาน</h3>
-          <p>
-            คุณรับรองว่ามีอายุอย่างน้อย 18 ปี หรือได้รับความยินยอมจากผู้ปกครองตามกฎหมายในการใช้งานบริการ
-            และมีความสามารถตามกฎหมายในพื้นที่ของคุณ
-          </p>
-
-          <h3 id="account">4) บัญชีผู้ใช้</h3>
-          <ul>
-            <li>คุณต้องให้ข้อมูลที่ถูกต้องและอัปเดตเสมอ</li>
-            <li>คุณต้องรักษาความลับของข้อมูลเข้าสู่ระบบและรับผิดชอบต่อกิจกรรมทั้งหมดที่เกิดขึ้นในบัญชีของคุณ</li>
-            <li>เราอาจระงับหรือยกเลิกบัญชีที่ละเมิดข้อกำหนดนี้</li>
-          </ul>
-
-          <h3 id="acceptable-use">5) การใช้งานที่ยอมรับได้</h3>
-          <p>คุณตกลงว่าจะไม่:</p>
-          <ul>
-            <li>ละเมิดกฎหมาย ลิขสิทธิ์ เครื่องหมายการค้า ความเป็นส่วนตัว หรือสิทธิอื่นใดของผู้อื่น</li>
-            <li>อัปโหลดหรือส่งเนื้อหาที่ผิดกฎหมาย อันตราย หลอกลวง สแปม หรือมีมัลแวร์</li>
-            <li>พยายามเข้าถึงระบบโดยไม่ได้รับอนุญาต หรือแทรกแซงการทำงานของเว็บไซต์</li>
-          </ul>
-
-          <h3 id="content">6) เนื้อหาของผู้ใช้</h3>
-          <p>
-            หากคุณส่งเนื้อหา คุณให้สิทธิ์ที่ไม่ผูกขาด โอนต่อได้ ไม่มีค่าลิขสิทธิ์ แก่เราในการใช้ ทำซ้ำ
-            ปรับเปลี่ยน เผยแพร่ และแสดงเนื้อหาดังกล่าวเพื่อให้บริการและปรับปรุงเว็บไซต์
-            คุณรับรองว่าเนื้อหานั้นถูกต้องและคุณมีสิทธิในการให้สิทธิ์ดังกล่าว
-          </p>
-
-          <h3 id="intellectual">7) ทรัพย์สินทางปัญญา</h3>
-          <p>
-            เนื้อหาทั้งหมดบนเว็บไซต์ (เช่น ข้อความ กราฟิก โลโก้ เครื่องหมายการค้า โค้ดซอร์ส)
-            เป็นทรัพย์สินของเราและ/หรือผู้ให้อนุญาต และได้รับความคุ้มครองตามกฎหมายทรัพย์สินทางปัญญา
-            ห้ามทำซ้ำ แก้ไข แจกจ่าย หรือสร้างงานต่อยอดโดยไม่ได้รับอนุญาตเป็นลายลักษณ์อักษร
-          </p>
-
-          <h3 id="third-party">8) ลิงก์และบริการของบุคคลที่สาม</h3>
-          <p>
-            เว็บไซต์อาจมีลิงก์ไปยังเว็บไซต์หรือบริการของบุคคลที่สาม เราไม่รับผิดชอบต่อเนื้อหา นโยบายความเป็นส่วนตัว
-            หรือการปฏิบัติของบุคคลที่สามดังกล่าว โปรดอ่านข้อกำหนดและนโยบายของบุคคลที่สามก่อนใช้งาน
-          </p>
-
-          <h3 id="privacy-ref">9) ความเป็นส่วนตัวและคุกกี้</h3>
-          <p>
-            การใช้เว็บไซต์อยู่ภายใต้นโยบายความเป็นส่วนตัวของเรา (ดูส่วนด้านล่าง) โปรดดูนโยบายและการตั้งค่าคุกกี้
-          </p>
-
-          <h3 id="payments">10) การชำระเงินและการสมัครสมาชิก (ถ้ามี)</h3>
-          <ul>
-            <li>ราคาค่าบริการจะแสดงบนเว็บไซต์และอาจเปลี่ยนแปลงได้</li>
-            <li>ค่าบริการไม่สามารถขอคืนได้ ยกเว้นที่กฎหมายบังคับ หรือระบุไว้ชัดเจน</li>
-            <li>การยกเลิกการสมัครสมาชิกจะมีผลในรอบบิลถัดไป</li>
-          </ul>
-
-          <h3 id="warranty">11) การรับประกันแบบจำกัด</h3>
-          <p>
-            เว็บไซต์ให้บริการ “ตามสภาพที่เป็น” และ “ตามที่มีให้” เราไม่รับประกันว่าเว็บไซต์จะไม่มีข้อผิดพลาด
-            ปลอดภัยสมบูรณ์หรือพร้อมใช้งานอย่างต่อเนื่องตลอดเวลา
-          </p>
-
-          <h3 id="liability">12) การจำกัดความรับผิด</h3>
-          <p>
-            ในขอบเขตสูงสุดที่กฎหมายอนุญาต เราไม่รับผิดต่อความเสียหายโดยอ้อม พิเศษ โดยบังเอิญ
-            หรือความเสียหายที่เป็นผลสืบเนื่องใดๆ ที่เกิดจากหรือเกี่ยวข้องกับการใช้งานเว็บไซต์ของคุณ
-          </p>
-
-          <h3 id="termination">13) การระงับหรือยุติการให้บริการ</h3>
-          <p>
-            เราอาจระงับหรือยุติการเข้าถึงเว็บไซต์ของคุณได้ทุกเมื่อโดยมีหรือไม่มีการแจ้งล่วงหน้า
-            หากเชื่อว่ามีการละเมิดข้อกำหนดหรือเพื่อปกป้องผู้ใช้รายอื่น
-          </p>
-
-          <h3 id="governing-law">14) กฎหมายที่ใช้บังคับ</h3>
-          <p>
-            ข้อกำหนดนี้อยู่ภายใต้กฎหมายของ <strong>ประเทศไทย</strong> โดยไม่คำนึงถึงหลักการขัดกันแห่งกฎหมาย
-            ข้อพิพาทใดๆ จะอยู่ภายใต้เขตอำนาจศาลของศาลในพื้นที่ดังกล่าว
-          </p>
-
-          <h3 id="contact-terms">15) การติดต่อ (Terms)</h3>
-          <p>
-            หากมีคำถามเกี่ยวกับข้อกำหนดนี้ โปรดติดต่อที่ <a href="mailto:mumufuyuta@gmail.com" class="underline text-pink-600">mumufuyuta@gmail.com</a>
-          </p>
-        </section>
-
-        <hr class="my-8" />
-
-        <!-- PRIVACY -->
-        <section id="privacy" class="fade-up">
-          <h2 class="text-2xl font-bold">นโยบายความเป็นส่วนตัว (Privacy Policy)</h2>
-          <p class="text-sm text-slate-700/80">อัปเดตล่าสุด: <span id="privacy-updated"></span></p>
-
-          <p>
-            Washi Co (“เรา”, “ของเรา”) ให้ความสำคัญกับความเป็นส่วนตัวของผู้ใช้งาน นโยบายนี้อธิบายการเก็บ ใช้
-            และปกป้องข้อมูลส่วนบุคคลที่ได้รับจากการใช้เว็บไซต์และบริการของเรา
-          </p>
-
-          <h3 id="p-data-collect">1) ข้อมูลที่เราเก็บ</h3>
-          <ul>
-            <li><strong>ข้อมูลที่คุณให้:</strong> ชื่อ อีเมล ที่อยู่ (ถ้ามี)</li>
-            <li><strong>ข้อมูลการใช้งาน:</strong> ข้อมูลการเข้าชม หน้าเพจ พาธ และเหตุการณ์การใช้งาน</li>
-            <li><strong>ข้อมูลทางเทคนิค:</strong> IP address, device, browser</li>
-            <li><strong>คุกกี้และตัวติดตาม:</strong> ตัวระบุตัวผู้ใช้แบบไม่ระบุชื่อ การตั้งค่า</li>
-          </ul>
-
-          <h3 id="p-data-use">2) การใช้ข้อมูล</h3>
-          <ul>
-            <li>ให้บริการและปรับปรุงผลิตภัณฑ์</li>
-            <li>สื่อสารกับผู้ใช้ (อีเมล, ประกาศ)</li>
-            <li>วิเคราะห์การใช้งานและปรับแต่งประสบการณ์</li>
-          </ul>
-
-          <h3 id="p-share">3) การเปิดเผย/แชร์ข้อมูล</h3>
-          <p>เราไม่ขายข้อมูลของผู้ใช้ แต่เราอาจแชร์ข้อมูลกับผู้ให้บริการด้านเทคนิค และเมื่อกฎหมายกำหนด</p>
-
-          <h3 id="p-cookies">4) คุกกี้และเทคโนโลยีติดตาม</h3>
-          <p>เราใช้คุกกี้เพื่อเก็บการตั้งค่า วิเคราะห์ และปรับปรุงประสบการณ์ คุณสามารถจัดการคุกกี้ได้จากเบราว์เซอร์</p>
-
-          <h3 id="p-rights">5) สิทธิของผู้ใช้งาน</h3>
-          <p>คุณมีสิทธิในการเข้าถึง แก้ไข หรือลบข้อมูลของคุณภายในขอบเขตที่กฎหมายอนุญาต ติดต่อเราที่อีเมลด้านล่าง</p>
-
-          <h3 id="p-security">6) การรักษาความปลอดภัยของข้อมูล</h3>
-          <p>เราใช้มาตรการทางเทคนิคเพื่อปกป้องข้อมูล เช่น HTTPS, การจำกัดการเข้าถึง และการสำรองข้อมูล แต่ไม่สามารถรับประกันความปลอดภัย 100%</p>
-
-          <h3 id="p-changes">7) การเปลี่ยนแปลงนโยบาย</h3>
-          <p>เราสามารถปรับเปลี่ยนนโยบายได้เป็นครั้งคราว โดยจะแจ้งวันที่ปรับในส่วนบนสุดของหน้านี้</p>
-
-          <h3 id="contact-privacy">8) การติดต่อ (Privacy)</h3>
-          <p>หากมีคำถามเกี่ยวกับนโยบาย ความเป็นส่วนตัว กรุณาติดต่อ: <a href="mailto:mumufuyuta@gmail.com" class="underline text-pink-600">mumufuyuta@gmail.com</a></p>
-        </section>
-
-        <p class="text-xs text-slate-300 mt-6">ข้อสงวนสิทธิ์: เอกสารนี้เป็นเทมเพลตทั่วไป ไม่ใช่คำแนะนำทางกฎหมาย โปรดปรึกษาทนายความหากต้องการความแน่นอนทางกฎหมาย</p>
-      </article>
-    </div>
-  </section>
-</main>
-
-<!-- Back to top -->
-<button id="backToTop" class="fixed bottom-6 right-6 p-3 rounded-full bg-white/90 shadow-lg hidden" aria-label="Back to top">
-  <i data-feather="chevron-up" class="w-5 h-5"></i>
-</button>
-
-<!-- Footer -->
-<footer class="mt-12 py-8">
-  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between text-white/90">
-    <div>© <span id="year"></span> Washi Co. สงวนลิขสิทธิ์</div>
-    <div class="text-sm"><a href="#contact-privacy" class="underline">ติดต่อ</a></div>
-  </div>
-</footer>
-
-  </div>  <script>
-    // Init icons
-    feather.replace();
-
-    // Typed.js
-    new Typed('#typedArea', {
-      strings: [
-        'อ่านข้อกำหนดและนโยบายก่อนใช้งาน',
-        'Washi Co ให้ความสำคัญกับความเป็นส่วนตัวและความปลอดภัย',
-        'โปรดอ่านและติดต่อเราหากมีคำถาม'
-      ],
-      typeSpeed: 45,
-      backSpeed: 30,
-      backDelay: 2000,
-      loop: true
-    });
-
-    // Dates
-    const now = new Date();
-    document.getElementById('year').textContent = now.getFullYear();
-    const fmt = new Intl.DateTimeFormat('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
-    document.getElementById('terms-updated').textContent = fmt.format(now);
-    document.getElementById('privacy-updated').textContent = fmt.format(now);
-
-    // Theme toggle (dark simulated by adding class on body)
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
       document.documentElement.classList.toggle('dark');
-      // small visual pulse
-      themeToggle.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 220 });
+      themeToggle.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.2)' }, { transform: 'scale(1)' }], { duration: 200 });
     });
 
-    // Scroll to top button
+    // Back to top
     const backBtn = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) backBtn.classList.remove('hidden'); else backBtn.classList.add('hidden');
+      backBtn.classList.toggle('hidden', window.scrollY <= 400);
     });
     backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
@@ -391,17 +246,24 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           tocLinks.forEach(l => l.classList.remove('active'));
-          const link = document.querySelector('aside nav a[href="#' + entry.target.id + '"]');
+          const link = document.querySelector(`aside nav a[href="#${entry.target.id}"]`);
           if (link) link.classList.add('active');
         }
       });
-    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+    }, { rootMargin: '-30% 0px -30% 0px', threshold: 0 });
     sections.forEach(s => observer.observe(s));
 
-    // Fade-up reveal for sections
-    document.querySelectorAll('.fade-up').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 120);
-    });
+    // Fade-up animation
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const fadeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(el => fadeObserver.observe(el));
 
     // Smooth anchor scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -414,5 +276,6 @@
         }
       });
     });
-  </script></body>
-  </htm
+  </script>
+</body>
+</html>
